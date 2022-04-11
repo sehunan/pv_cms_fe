@@ -7,10 +7,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+
+
+
 
 const Signin = () => {
 
-    const [value, setValue] = useState("");
+    /*const [value, setValue] = useState("");
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -18,44 +22,53 @@ const Signin = () => {
 
     useEffect(() => {
         console.log("value: " + value)
-    }, [value])
+    }, [value])*/
 
     return (
         <>
-            <div>
-                이건 로그인 페이지임
-            </div>
-            <Card sx={{ maxWidth: 345 }}>
-                <CardMedia
-                    component="img"
-                    height="140"
-                    image="https://user-images.githubusercontent.com/44333767/162618795-4cf597b4-0337-4063-aada-f45598e39608.png"
-                    alt="green iguana"
-                />
+            <Card sx={{ minWidth: 275 }}>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                    <Typography sx={{ fontSize: 20 }} color="black" >
+                        Sign in
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                    <Typography sx={{ fontSize: 12 }} color="text.secondary" variant="h5" component="div">
+                        portValue에 오신걸 환영합니다.
+                    </Typography>
+
+                    <Box
+                        component="form"
+                        sx={{
+                            '& > :not(style)': { m: 1, width: '25ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <TextField id="outlined-basic" label="이메일" variant="outlined" />
+                        <br />
+                        <TextField id="outlined-basic" label="비밀번호" variant="outlined" />
+                    </Box>
+
+                    <Stack direction="row" spacing={2} >
+                        <Button variant="contained" disabled>
+                            로그인
+                        </Button>
+                    </Stack>
+
+
+
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        adjective
+                    </Typography>
+                    <Typography variant="body2">
+                        well meaning and kindly.
+                        <br />
+                        {'"a benevolent smile"'}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Share</Button>
                     <Button size="small">Learn More</Button>
                 </CardActions>
             </Card>
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '25ch' },
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <TextField id="outlined-basic" label="이메일" variant="outlined" value={value} onChange={handleChange} />
-            </Box>
         </>
     )
 };
