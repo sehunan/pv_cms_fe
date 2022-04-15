@@ -12,6 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 
 const Signin = () => {
 
@@ -27,37 +28,44 @@ const Signin = () => {
 
     return (
         <>
-            <Card>
-                <CardContent>
-                    <Typography sx={{ fontSize: 20 }} color="black" >
-                        Sign in
-                    </Typography>
-                    <Typography sx={{ fontSize: 12 }} color="text.secondary" variant="h5" component="div">
-                        portValue에 오신걸 환영합니다.
-                    </Typography>
+            <Container component="main" maxWidth="xs">
+                <Card sx={{
+                    shadow: "100",
+                    marginTop: 15,
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}>
+                    <CardContent>
+                        <Typography sx={{ fontSize: 20 }} color="black" >
+                            Sign in
+                        </Typography>
+                        <Typography sx={{ fontSize: 12 }} color="text.secondary" variant="h5" component="div">
+                            portValue에 오신걸 환영합니다🎉
+                        </Typography>
 
-                    <Box>
-                        <TextField label="이메일" name="email" fullWidth autoFocus sx={{ mt: 3 }} />
-                        <br />
-                        <TextField label="비밀번호" name="password" fullWidth type="password" sx={{ mt: 2 }} />
+                        <Box>
+                            <TextField label="이메일" name="email" fullWidth autoFocus sx={{ mt: 3 }} />
+                            <br />
+                            <TextField label="비밀번호" name="password" fullWidth type="password" sx={{ mt: 2 }} />
 
-                    </Box>
+                        </Box>
 
-                    <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }} disabled>
-                        로그인
-                    </Button>
+                        <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }} disabled>
+                            로그인
+                        </Button>
 
-                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 상태 유지" sx={{ mt: 2 }} />
+                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 상태 유지" />
 
-                    <Grid container>
-                        <Grid item xs={1}><Link>아이디 찾기</Link></Grid>
-                        <Grid item xs><Link>비밀번호 찾기</Link></Grid>
-                        <Grid><Link>회원가입</Link></Grid>
-                    </Grid>
+                        <Grid container>
+                            <Grid sx={{ fontSize: 12 }} item xs={2}><Link>아이디 찾기</Link></Grid>
+                            <Grid sx={{ fontSize: 12 }} item xs><Link>비밀번호 찾기</Link></Grid>
+                            <Grid sx={{ fontSize: 12 }}><Link>회원가입</Link></Grid>
+                        </Grid>
 
-                </CardContent>
+                    </CardContent>
 
-            </Card>
+                </Card>
+            </Container>
         </>
     )
 };
