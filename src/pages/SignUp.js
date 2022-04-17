@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,12 +14,9 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
-const SignIn = () => {
-    const navigate = useNavigate();
+const SignUp = () => {
 
-    function handleClickToSU() {
-        navigate('/signup')
-    }
+
     /*const [value, setValue] = useState("");
 
     const handleChange = (event) => {
@@ -46,10 +42,7 @@ const SignIn = () => {
                 }}>
                     <CardContent>
                         <Typography sx={{ fontSize: 20 }} color="black" >
-                            Sign in
-                        </Typography>
-                        <Typography sx={{ fontSize: 12 }} color="text.secondary" variant="h1" component="div">
-                            portValue에 오신걸 환영합니다🎉
+                            Sign up
                         </Typography>
 
                         <Box>
@@ -62,14 +55,6 @@ const SignIn = () => {
                         <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }} disabled>
                             로그인
                         </Button>
-
-                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 상태 유지" />
-
-                        <Grid container>
-                            <Grid sx={{ fontSize: 12 }} item xs={2}><Link>아이디 찾기</Link></Grid>
-                            <Grid sx={{ fontSize: 12 }} item xs><Link>비밀번호 찾기</Link></Grid>
-                            <Grid sx={{ fontSize: 12 }}><Link onClick={handleClickToSU}>회원가입</Link></Grid>
-                        </Grid>
                     </CardContent>
                 </Card>
             </Container>
@@ -77,4 +62,4 @@ const SignIn = () => {
     )
 };
 
-export default SignIn;
+export default SignUp;
