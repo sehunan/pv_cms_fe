@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,20 +14,8 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
-const SignIn = () => {
-    const navigate = useNavigate();
+const FindID = () => {
 
-    function handleClickToSU() {
-        navigate('/signup')
-    }
-
-    function handleClickToFI() {
-        navigate('/FindID')
-    }
-
-    function handleClickToFP() {
-        navigate('/FindPW')
-    }
 
     /*const [value, setValue] = useState("");
 
@@ -45,6 +32,8 @@ const SignIn = () => {
 
 
 
+
+
     return (
         <>
             <Container component="main" maxWidth="xs">
@@ -55,10 +44,7 @@ const SignIn = () => {
                 }}>
                     <CardContent>
                         <Typography sx={{ fontSize: 20 }} color="black" >
-                            Sign in
-                        </Typography>
-                        <Typography sx={{ fontSize: 12 }} color="text.secondary" variant="h1" component="div">
-                            portValue에 오신걸 환영합니다🎉
+                            아이디찾기
                         </Typography>
 
                         <Box>
@@ -69,16 +55,8 @@ const SignIn = () => {
                         </Box>
 
                         <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }} disabled>
-                            로그인
+                            아이디찾기
                         </Button>
-
-                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 상태 유지" />
-
-                        <Grid container>
-                            <Grid sx={{ fontSize: 12 }} item xs={2}><Link onClick={handleClickToFI}>아이디 찾기</Link></Grid>
-                            <Grid sx={{ fontSize: 12 }} item xs><Link onClick={handleClickToFP}>비밀번호 찾기</Link></Grid>
-                            <Grid sx={{ fontSize: 12 }}><Link onClick={handleClickToSU}>회원가입</Link></Grid>
-                        </Grid>
                     </CardContent>
                 </Card>
             </Container>
@@ -86,4 +64,4 @@ const SignIn = () => {
     )
 };
 
-export default SignIn;
+export default FindID;
