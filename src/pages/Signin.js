@@ -17,36 +17,32 @@ import Container from '@mui/material/Container';
 
 const SignIn = () => {
     const navigate = useNavigate();
+    const [idValue, setIdValue] = useState('');
+    const [password, setPassword] = useState('');
+    const [disable, setDisable] = useState(true);
 
     function handleClickToSU() {
         navigate('/signup')
-    }
+    };
 
     function handleClickToFI() {
         navigate('/FindID')
-    }
+    };
 
     function handleClickToFP() {
         navigate('/FindPW')
-    }
-
-
-
-
-
-    /*const [value, setValue] = useState("");
-
-    const handleChange = (event) => {
-        setValue(event.target.value);
     };
 
-    useEffect(() => {
-        console.log("value: " + value)
-    }, [value])*/
+    const handleInput = event => {
+        return event.target.value;
+    };
 
 
-
-
+    const handleDisable = () => {
+        idValue.includes('@') && password.length >= 3
+            ? setDisable(false)
+            : setDisable(true);
+    };
 
 
     return (
@@ -68,13 +64,23 @@ const SignIn = () => {
                         </Typography>
 
                         <Box>
-                            <TextField className="Id" label="이메일" name="email" fullWidth autoFocus sx={{ mt: 3 }} />
+                            <TextField className="Id" label="이메일" name="email" fullWidth autoFocus sx={{ mt: 3 }} onChange={event => {
+                                setIdValue(handleInput(event));
+                                console.log(idValue);
+
+                                handleDisable();
+                            }} />
                             <p style={{ color: 'red', fontSize: '14px' }}>등록된 계정이 없습니다.</p>
-                            <TextField className="Password" label="비밀번호" name="password" fullWidth type="password" />
+                            <TextField className="Password" label="비밀번호" name="password" fullWidth type="password" onChange={event => {
+                                setPassword(handleInput(event));
+
+                                handleDisable();
+                            }} />
                             <p style={{ color: 'red', fontSize: '14px' }}>비밀번호가 일치하지 않습니다.</p>
                         </Box>
 
-                        <Button type="submit" variant="contained" fullWidth disabled>
+                        <Button type="submit" variant="contained" fullWidth disabled={disable}
+                        >
                             로그인
                         </Button>
 
