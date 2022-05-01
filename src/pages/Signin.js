@@ -30,6 +30,10 @@ const SignIn = () => {
         navigate('/FindPW')
     }
 
+
+
+
+
     /*const [value, setValue] = useState("");
 
     const handleChange = (event) => {
@@ -49,35 +53,37 @@ const SignIn = () => {
         <>
             <Container component="main" maxWidth="xs">
                 <Card sx={{
-                    marginTop: 15,
+                    marginTop: 30,
                     flexDirection: "column",
                     alignItems: "center",
+                    boxShadow: "7"
                 }}>
                     <CardContent>
                         <Typography sx={{ fontSize: 20 }} color="black" >
                             Sign in
                         </Typography>
-                        <Typography sx={{ fontSize: 12 }} color="text.secondary" variant="h1" component="div">
-                            portValue에 오신걸 환영합니다🎉
+
+                        <Typography sx={{ fontSize: 12 }} color="gray" variant="h1" component="div">
+                            PortValue에 오신걸 환영합니다🎉
                         </Typography>
 
                         <Box>
                             <TextField className="Id" label="이메일" name="email" fullWidth autoFocus sx={{ mt: 3 }} />
-                            <br />
-                            <TextField className="Password" label="비밀번호" name="password" fullWidth type="password" sx={{ mt: 2 }} />
-
+                            <p style={{ color: 'red', fontSize: '14px' }}>등록된 계정이 없습니다.</p>
+                            <TextField className="Password" label="비밀번호" name="password" fullWidth type="password" />
+                            <p style={{ color: 'red', fontSize: '14px' }}>비밀번호가 일치하지 않습니다.</p>
                         </Box>
 
-                        <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }} disabled>
+                        <Button type="submit" variant="contained" fullWidth disabled>
                             로그인
                         </Button>
 
                         <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 상태 유지" />
 
                         <Grid container>
-                            <Grid sx={{ fontSize: 12 }} item xs={2}><Link onClick={handleClickToFI}>아이디 찾기</Link></Grid>
-                            <Grid sx={{ fontSize: 12 }} item xs><Link onClick={handleClickToFP}>비밀번호 찾기</Link></Grid>
-                            <Grid sx={{ fontSize: 12 }}><Link onClick={handleClickToSU}>회원가입</Link></Grid>
+                            <Grid sx={{ fontSize: 14 }} item xs={2.5}><Link onClick={handleClickToFI}>아이디 찾기</Link></Grid>
+                            <Grid sx={{ fontSize: 14 }} item xs><Link onClick={handleClickToFP}>비밀번호 찾기</Link></Grid>
+                            <Grid sx={{ fontSize: 14 }}><Link onClick={handleClickToSU}>회원가입</Link></Grid>
                         </Grid>
                     </CardContent>
                 </Card>
