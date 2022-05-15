@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -20,6 +21,20 @@ const SignIn = () => {
     const [idValue, setIdValue] = useState('');
     const [password, setPassword] = useState('');
     const [disable, setDisable] = useState(true);
+    const [isErr, setIsErr] = useState(false);
+
+
+    const handleInput = (event) => {
+        return event.target.value;
+    };
+
+    const handleDisable = () => {
+        if (idValue.includes('@') && password.length >= 3) {
+            setDisable(false);
+        } else {
+            setDisable(true);
+        }
+    };
 
     function handleClickToSU() {
         navigate('/signup')
@@ -33,29 +48,23 @@ const SignIn = () => {
         navigate('/FindPW')
     };
 
-    const handleInput = event => {
-        return event.target.value;
+    function handleClickToER() {
+
     };
 
-
-    const handleDisable = () => {
-        idValue.includes('@') && password.length >= 3
-            ? setDisable(false)
-            : setDisable(true);
-    };
 
 
     return (
         <>
             <Container component="main" maxWidth="xs">
                 <Card sx={{
-                    marginTop: 30,
+                    marginTop: 25,
                     flexDirection: "column",
                     alignItems: "center",
                     boxShadow: "7"
                 }}>
                     <CardContent>
-                        <Typography sx={{ fontSize: 20 }} color="black" >
+                        <Typography sx={{ fontSize: 22 }} color="black" >
                             Sign in
                         </Typography>
 
@@ -64,24 +73,45 @@ const SignIn = () => {
                         </Typography>
 
                         <Box>
-                            <TextField className="Id" label="이메일" name="email" fullWidth autoFocus sx={{ mt: 3 }} onChange={event => {
-                                setIdValue(handleInput(event));
-                                console.log(idValue);
+                            <TextField
+                                label="이메일"
+                                name="email"
+                                fullWidth
+                                autoFocus
+                                error={isErr}
+                                helperText={isErr ? "등록되지 않은 ID 입니다." : ""}
+                                sx={{ mt: 3 }}
+                                onChange={event => {
+                                    setIdValue(handleInput(event));
+                                    handleDisable();
+                                }} />
 
-                                handleDisable();
-                            }} />
-                            <p style={{ color: 'red', fontSize: '14px' }}>등록된 계정이 없습니다.</p>
-                            <TextField className="Password" label="비밀번호" name="password" fullWidth type="password" onChange={event => {
-                                setPassword(handleInput(event));
+                            <TextField
+                                className="Password"
+                                label="비밀번호"
+                                name="password"
+                                fullWidth
+                                type="password"
+                                error={isErr}
+                                helperText={isErr ? "비밀번호가 일치하지 않습니다." : ""}
+                                sx={{ mt: 3 }}
+                                onChange={event => {
+                                    setPassword(handleInput(event));
+                                    handleDisable();
+                                }} />
 
-                                handleDisable();
-                            }} />
-                            <p style={{ color: 'red', fontSize: '14px' }}>비밀번호가 일치하지 않습니다.</p>
                         </Box>
 
-                        <Button type="submit" variant="contained" fullWidth disabled={disable}
-                        >
+                        <Button type="submit" variant="contained" fullWidth disabled={disable} sx={{ mt: 3 }} >
                             로그인
+                        </Button>
+
+                        <Button type="submit" variant="contained" fullWidth onClick={
+                            () => {
+                                setIsErr(true)
+                            }
+                        }>
+                            에러발생
                         </Button>
 
                         <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 상태 유지" />
