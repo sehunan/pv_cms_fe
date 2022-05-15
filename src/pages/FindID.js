@@ -16,47 +16,71 @@ import Container from '@mui/material/Container';
 
 const FindID = () => {
 
+    const [disable, setDisable] = useState(true);
+    const [phoneNumber, setPh] = useState('');
+    const [isErr, setIsErr] = useState(false);
 
-    /*const [value, setValue] = useState("");
-
-    const handleChange = (event) => {
-        setValue(event.target.value);
+    const handleInput = (event) => {
+        return event.target.value;
     };
 
-    useEffect(() => {
-        console.log("value: " + value)
-    }, [value])*/
-
-
-
-
-
-
-
+    const handleDisable = () => {
+        if (phoneNumber.length >= 10) {
+            setDisable(false);
+        } else {
+            setDisable(true);
+        }
+    };
 
     return (
         <>
             <Container component="main" maxWidth="xs">
                 <Card sx={{
-                    marginTop: 15,
+                    marginTop: 35,
                     flexDirection: "column",
                     alignItems: "center",
+                    boxShadow: "7"
                 }}>
                     <CardContent>
                         <Typography sx={{ fontSize: 20 }} color="black" >
-                            아이디찾기
+                            아이디 찾기
+                        </Typography>
+
+                        <Typography sx={{ fontSize: 12 }} color="gray" variant="h1" component="div">
+                            회원가입 시 입력한 핸드폰 번호(숫자 11자리)를 입력해주세요.
                         </Typography>
 
                         <Box>
-                            <TextField className="Id" label="이메일" name="email" fullWidth autoFocus sx={{ mt: 3 }} />
-                            <br />
-                            <TextField className="Password" label="비밀번호" name="password" fullWidth type="password" sx={{ mt: 2 }} />
-
+                            <TextField
+                                label="핸드폰 번호"
+                                name="phoneNumber"
+                                fullWidth
+                                autoFocus
+                                sx={{ mt: 3 }}
+                                error={isErr}
+                                helperText={isErr ? "입력한 정보와 일치하는 계정이 없습니다." : ""}
+                                onChange={event => {
+                                    setPh(handleInput(event));
+                                    handleDisable();
+                                }} />
                         </Box>
 
-                        <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }} disabled>
-                            아이디찾기
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            fullWidth sx={{ mt: 3 }}
+                            disabled={disable}>
+                            확인
                         </Button>
+
+                        <Button type="submit" variant="contained" fullWidth onClick={
+                            () => {
+                                setIsErr(true)
+                            }
+                        }>
+                            에러발생
+                        </Button>
+
                     </CardContent>
                 </Card>
             </Container>

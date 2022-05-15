@@ -48,11 +48,6 @@ const SignIn = () => {
         navigate('/FindPW')
     };
 
-    function handleClickToER() {
-
-    };
-
-
 
     return (
         <>
