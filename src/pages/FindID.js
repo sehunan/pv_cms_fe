@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,7 +16,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
 const FindID = () => {
-
+    const navigate = useNavigate();
     const [disable, setDisable] = useState(true);
     const [phoneNumber, setPh] = useState('');
     const [isErr, setIsErr] = useState(false);
@@ -31,6 +32,14 @@ const FindID = () => {
         } else {
             setDisable(true);
         }
+    };
+
+    function handleClickToSI() {
+        navigate('/signin')
+    };
+
+    function handleClickToFP() {
+        navigate('/FindPW')
     };
 
     return (
@@ -115,14 +124,16 @@ const FindID = () => {
                             <Button
                                 type="submit"
                                 variant="contained"
-                                sx={{ mt: 3 }}
+                                sx={{ width: 0.4, mt: 3 }}
+                                onClick={handleClickToSI}
                             >
                                 로그인 하기
                             </Button>
                             <Button
                                 type="submit"
                                 variant="contained"
-                                sx={{ mt: 3 }}
+                                sx={{ mt: 3, width: 0.4, mx: 2 }}
+                                onClick={handleClickToFP}
                             >
                                 비밀번호 찾기
                             </Button>
