@@ -15,6 +15,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+import styled from "styled-components";
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -96,8 +97,12 @@ const SignIn = () => {
                                 }} />
 
                         </Box>
-
-                        <Button type="submit" variant="contained" fullWidth disabled={disable} sx={{ mt: 3 }} >
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            fullWidth
+                            disabled={disable}
+                            sx={{ mt: 3 }} >
                             로그인
                         </Button>
 
@@ -108,19 +113,49 @@ const SignIn = () => {
                         }>
                             에러발생
                         </Button>
-
                         <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 상태 유지" />
 
-                        <Grid container>
+                        {/* <Grid container>
                             <Grid sx={{ fontSize: 14 }} item xs={2.5}><Link onClick={handleClickToFI}>아이디 찾기</Link></Grid>
                             <Grid sx={{ fontSize: 14 }} item xs><Link onClick={handleClickToFP}>비밀번호 찾기</Link></Grid>
                             <Grid sx={{ fontSize: 14 }}><Link onClick={handleClickToSU}>회원가입</Link></Grid>
-                        </Grid>
+
+
+                        </Grid> */}
+
+
+                        <SignInDetailDiv>
+                            <FindFlexDiv>
+                                <BlueLink marginRight="10px">
+                                    여기1
+                                </BlueLink>
+                                <BlueLink>
+                                    여기2
+                                </BlueLink>
+                            </FindFlexDiv>
+                            <BlueLink>
+                                여기3
+                            </BlueLink>
+                        </SignInDetailDiv>
                     </CardContent>
                 </Card>
             </Container>
         </>
     )
 };
+
+const SignInDetailDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+const FindFlexDiv = styled.div`
+    display: flex;
+    justify-content: flex-start;
+`;
+const BlueLink = styled.div`
+    color: blue;
+    text-decoration: underline;
+    margin-right: ${props => props.marginRight !== undefined ? props.marginRight : "0px"};
+`;
 
 export default SignIn;
