@@ -15,6 +15,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+
 import styled from "styled-components";
 
 const SignIn = () => {
@@ -126,15 +127,15 @@ const SignIn = () => {
 
                         <SignInDetailDiv>
                             <FindFlexDiv>
-                                <BlueLink marginRight="10px">
-                                    여기1
+                                <BlueLink marginRight="10px" onClick={handleClickToFI}>
+                                    아이디 찾기
                                 </BlueLink>
-                                <BlueLink>
-                                    여기2
+                                <BlueLink onClick={handleClickToFP}>
+                                    비밀번호 찾기
                                 </BlueLink>
                             </FindFlexDiv>
-                            <BlueLink>
-                                여기3
+                            <BlueLink onClick={handleClickToSU}>
+                                회원가입
                             </BlueLink>
                         </SignInDetailDiv>
                     </CardContent>
@@ -153,6 +154,7 @@ const FindFlexDiv = styled.div`
     justify-content: flex-start;
 `;
 const BlueLink = styled.div`
+    font-size: 0.8rem;
     color: blue;
     text-decoration: underline;
     margin-right: ${props => props.marginRight !== undefined ? props.marginRight : "0px"};

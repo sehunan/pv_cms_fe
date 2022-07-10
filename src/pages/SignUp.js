@@ -23,16 +23,23 @@ import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import FilledInput from '@mui/material/FilledInput';
 
+import styled from "styled-components";
+
 const SignUp = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
-    const [idValue, setIdValue] = useState('');
-    const [password, setPassword] = useState('');
+    const [passwords, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
     const [birthday, setBirthday] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [disable, setDisable] = useState(true);
     const [isErr, setIsErr] = useState(false);
+    const [IDValue, setIdValue] = useState('');
+    const [currency, setCurrency] = React.useState('NAVER');
+    const [values, setValues] = React.useState({
+        password: '',
+        showPassword: false,
+    });
 
     const currencies = [
         {
@@ -53,33 +60,36 @@ const SignUp = () => {
         },
     ];
 
-    const [currency, setCurrency] = React.useState('NAVER');
 
-    const [values, setValues] = React.useState({
-        amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
-    });
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
-    const handleChange = (event) => {
+    const handleIDValueChange = (event) => {
+        setIdValue(event.target.value);
+    };
+
+    const handleCurrencyChange = (event) => {
         setCurrency(event.target.value);
     };
 
-    /*const handleClickShowPassword = () => {
+    const handlePasswordChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    const handleClickShowPassword = () => {
         setValues({
             ...values,
             showPassword: !values.showPassword,
         });
-    };*/
+    };
 
     const handleInput = (event) => {
         return event.target.value;
     };
 
     const handleDisable = () => {
-        if (name.length > 1 && idValue.includes('@') && password.length >= 3 && password == passwordCheck
+        if (name.length > 1 && passwords.length >= 3 && passwords == passwordCheck
             && birthday.length > 7 && phoneNumber.length > 9) {
             setDisable(false);
         } else {
@@ -87,6 +97,12 @@ const SignUp = () => {
         }
     };
 
+    {/*useEffect(() => {
+        if (IDValue !== "" && currency !== "")
+            setIsActive(true)
+        else
+            setIsActive(false)
+    }, [IDValue, currency])*/}
 
     return (
         <>
@@ -118,30 +134,42 @@ const SignUp = () => {
                                 }} />
                             <br />
 
-                            <TextField
-                                className="Id"
-                                label="이메일"
-                                name="email"
-                                fullWidth
-                                sx={{ mt: 2 }}
-                                select
-                                value={currency}
-                                error={isErr}
-                                helperText={isErr ? "이메일 형식이 올바르지 않습니다." : ""}
-                                onChange={event => {
-                                    handleChange();
-                                    setIdValue(handleInput(event));
-                                    handleDisable();
-                                }} >
-                                {currencies.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                            <EmailTextFieldDiv>
+                                <EmailKeyDiv>
+                                    <TextField
+                                        className="Id"
+                                        label="이메일"
+                                        name="email"
+                                        fullWidth
+                                        sx={{ mt: 2 }}
+                                        value={IDValue}
+                                        error={isErr}
+                                        helperText={isErr ? "이메일 형식이 올바르지 않습니다." : ""}
+                                        onChange={handleIDValueChange} >
+                                    </TextField>
+                                </EmailKeyDiv>
+                                <EmailAtDiv>@</EmailAtDiv>
+                                <EmailValueDiv>
+                                    <TextField
+                                        className="currency"
+                                        label="선택"
+                                        name="email"
+                                        fullWidth
+                                        sx={{ mt: 2 }}
+                                        select
+                                        value={currency}
+                                        onChange={handleCurrencyChange} >
+                                        {currencies.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
+                                </EmailValueDiv>
+                            </EmailTextFieldDiv>
                             <br />
 
-                            {/* <TextField
+                            <TextField
                                 className="Password"
                                 label="비밀번호"
                                 name="password"
@@ -164,10 +192,10 @@ const SignUp = () => {
                                         </IconButton>
                                     </InputAdornment>
                                 }
-                                onChange={event => {
-                                    setPassword(handleInput(event));
+                                onChange={() => {
+                                    handlePasswordChange('password');
                                     handleDisable();
-                                }} /> */}
+                                }} />
                             <br />
 
                             <TextField
@@ -223,13 +251,13 @@ const SignUp = () => {
                             회원가입
                         </Button>
 
-                        <Button type="submit" variant="contained" fullWidth onClick={
+                        {/* <Button type="submit" variant="contained" fullWidth onClick={
                             () => {
                                 setIsErr(true)
                             }
                         }>
                             에러발생
-                        </Button>
+                        </Button> */}
 
                     </CardContent>
                 </Card>
@@ -237,5 +265,22 @@ const SignUp = () => {
         </>
     )
 };
+
+const EmailTextFieldDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+`;
+const EmailKeyDiv = styled.div`
+    width: 45%;
+`;
+const EmailAtDiv = styled.div`
+    width: 10%;
+    text-align: center;
+    margin-top: 35px;
+`;
+const EmailValueDiv = styled.div`
+    width: 45%;
+`;
 
 export default SignUp;
