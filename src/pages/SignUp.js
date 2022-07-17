@@ -22,6 +22,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import FilledInput from '@mui/material/FilledInput';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 import styled from "styled-components";
 
@@ -29,7 +31,7 @@ const SignUp = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [passwords, setPassword] = useState('');
-    const [passwordCheck, setPasswordCheck] = useState('');
+    const [passwordsCheck, setPasswordCheck] = useState('');
     const [birthday, setBirthday] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [disable, setDisable] = useState(true);
@@ -38,6 +40,7 @@ const SignUp = () => {
     const [currency, setCurrency] = React.useState('NAVER');
     const [values, setValues] = React.useState({
         password: '',
+        passwordCheck: '',
         showPassword: false,
     });
 
@@ -89,7 +92,7 @@ const SignUp = () => {
     };
 
     const handleDisable = () => {
-        if (name.length > 1 && passwords.length >= 3 && passwords == passwordCheck
+        if (name.length > 1 && passwords.length >= 3 && passwords == passwordsCheck
             && birthday.length > 7 && phoneNumber.length > 9) {
             setDisable(false);
         } else {
@@ -167,9 +170,8 @@ const SignUp = () => {
                                     </TextField>
                                 </EmailValueDiv>
                             </EmailTextFieldDiv>
-                            <br />
 
-                            <TextField
+                            {/* <TextField
                                 className="Password"
                                 label="비밀번호"
                                 name="password"
@@ -195,10 +197,9 @@ const SignUp = () => {
                                 onChange={() => {
                                     handlePasswordChange('password');
                                     handleDisable();
-                                }} />
-                            <br />
-
-                            <TextField
+                                }} /> 
+                                
+                                <TextField
                                 className="PasswordCheck"
                                 label="비밀번호확인"
                                 name="passwordcheck"
@@ -210,8 +211,66 @@ const SignUp = () => {
                                 onChange={event => {
                                     setPasswordCheck(handleInput(event));
                                     handleDisable();
-                                }} />
-                            <br />
+                                }} /> */}
+
+                            {/*이전에 작업한 패스워드 텍스트필드 */}
+
+                            <FormControl sx={{ mt: 2 }} fullWidth variant="outlined" error={isErr}
+                                helperText={isErr ? "비밀번호 형식이 올바르지 않습니다." : ""} onChange={(e) => {
+                                    setPassword(handleInput(e));
+                                    handleDisable();
+                                }}>
+                                <InputLabel htmlFor="outlined-adornment-password">비밀번호</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handlePasswordChange('password')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="Password"
+
+                                />
+                            </FormControl>
+
+                            <FormControl sx={{ mt: 2 }} fullWidth variant="outlined" error={isErr}
+                                helperText={isErr ? "비밀번호 형식이 올바르지 않습니다." : ""} onChange={(e) => {
+                                    setPasswordCheck(handleInput(e));
+                                    handleDisable();
+                                }}>
+                                <InputLabel htmlFor="outlined-adornment-password">비밀번호확인</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-passwordCheck"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.passwordCheck}
+                                    onChange={handlePasswordChange('passwordCheck')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="PasswordCheck"
+
+                                />
+                            </FormControl>
+
 
                             <TextField
                                 className="Birthday"
@@ -224,8 +283,10 @@ const SignUp = () => {
                                 onChange={event => {
                                     setBirthday(handleInput(event));
                                     handleDisable();
-                                }} />
-                            <br />
+                                }}
+                                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                            />
+
 
                             <TextField
                                 className="PhoneNumber"
